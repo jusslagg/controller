@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Campaña y Calculadora</title>
+    <!-- Tailwind CSS y DaisyUI -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daisyui@1.20.0/dist/full.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div class="flex justify-between p-8 space-x-8">
+      <!-- Formulario Selector -->
+      <section
+        class="w-1/2 bg-white p-6 rounded-lg shadow-md border border-gray-200"
+      >
+        <h2 class="text-xl font-semibold text-center mb-4">
+          Selecciona Cliente y Campaña
+        </h2>
+        <div class="space-y-4">
+          <!-- Selector de Cliente -->
+          <div>
+            <label for="cliente" class="block font-medium">Cliente</label>
+            <select id="cliente" class="select select-bordered w-full mt-2">
+              <option value="">Selecciona un Cliente</option>
+            </select>
+          </div>
+
+          <!-- Selector de Campaña -->
+          <div>
+            <label for="campaña" class="block font-medium">Campaña</label>
+            <select
+              id="campaña"
+              class="select select-bordered w-full mt-2"
+              disabled
+            >
+              <option value="">Selecciona una Campaña</option>
+            </select>
+          </div>
+
+          <!-- Selector de Mes -->
+          <div>
+            <label for="mes" class="block font-medium">Mes</label>
+            <select
+              id="mes"
+              class="select select-bordered w-full mt-2"
+              disabled
+            >
+              <option value="">Selecciona un Mes</option>
+            </select>
+          </div>
+
+          <!-- Botón para mostrar datos -->
+          <button id="mostrarDatos" class="btn btn-primary w-full mt-4">
+            Mostrar Datos
+          </button>
+        </div>
+      </section>
+
+      <!-- Formulario Calculadora de Fechas -->
+      <section
+        class="w-1/2 bg-white p-6 rounded-lg shadow-md border border-gray-200"
+      >
+        <h2 class="text-xl font-semibold text-center mb-4">
+          Calculadora de Fechas
+        </h2>
+        <div class="space-y-4">
+          <!-- Selector de Fecha -->
+          <div>
+            <label for="fecha" class="block font-medium">Fecha</label>
+            <input
+              id="fecha"
+              type="date"
+              class="input input-bordered w-full mt-2"
+            />
+          </div>
+
+          <!-- Input de días -->
+          <div>
+            <label for="dias" class="block font-medium">Días</label>
+            <input
+              id="dias"
+              type="number"
+              class="input input-bordered w-full mt-2"
+              placeholder="Cantidad de días"
+            />
+          </div>
+
+          <!-- Botón para calcular -->
+          <button id="calcularFecha" class="btn btn-primary w-full mt-4">
+            Calcular Fecha Inicial
+          </button>
+
+          <!-- Resultado de la calculadora -->
+          <div
+            id="resultadoCalculadora"
+            class="mt-4 text-center text-lg font-semibold"
+          ></div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Sección para mostrar resultados de campaña -->
+    <section
+      id="resultados"
+      class="container mx-auto mt-8 p-6 bg-white rounded-lg shadow-md border border-gray-200 hidden"
+    >
+      <h3 class="text-2xl font-semibold">Detalles de la Campaña</h3>
+      <div id="datosCampaña" class="mt-4 text-lg text-gray-700"></div>
+    </section>
+
+    <!-- Script de la aplicación -->
+    <script src="selector.js"></script>
+    <script src="calculadora.js"></script>
+  </body>
+</html>

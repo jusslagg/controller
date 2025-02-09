@@ -1,0 +1,32 @@
+{
+  "campañas": [
+    {
+      "cliente": "ASSURANT",
+      "campaña": "ASSURANT",
+      "q_semanas_totales": 3,
+      "q_dias_habiles": 15,
+      "fechas": {
+        "Enero": "11/12/2024",
+        "Febrero": "13/01/2025",
+        "Marzo": "10/02/2025",
+        "Abril": "07/03/2025",
+        "Mayo": "09/04/2025",
+        "Junio": "12/05/2025"
+      }
+    },
+    {
+      "cliente": "BANCO COMAFI",
+      "campaña": "ATENCION AL CLIENTE",
+      "q_semanas_totales": 4,
+      "q_dias_habiles": 20,
+      "fechas": {
+        "Enero": "04/12/2024",
+        "Febrero": "06/01/2025",
+        "Marzo": "03/02/2025",
+        "Abril": "26/02/2025",
+        "Mayo": "01/04/2025",
+        "Junio": "05/05/2025"
+      }
+    }
+  ]
+}
