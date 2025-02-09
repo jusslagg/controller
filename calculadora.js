@@ -36,15 +36,38 @@ function esDiaHabil(fecha) {
 function restarDiasHabiles(fecha, diasAHabiles) {
   let fechaResultado = new Date(fecha);
   let diasRestados = 0;
+  let finesDeSemana = 0; // Contador de fines de semana
+  let feriadosEnRango = []; // Arreglo para almacenar feriados en el rango
 
+  // Recorremos los días restando hasta llegar a la cantidad deseada de días hábiles
   while (diasRestados < diasAHabiles) {
-    fechaResultado.setDate(fechaResultado.getDate() - 1);
+    const fechaStr = `${fechaResultado
+      .getDate()
+      .toString()
+      .padStart(2, "0")}/${(fechaResultado.getMonth() + 1)
+      .toString()
+      .padStart(2, "0")}/${fechaResultado.getFullYear()}`;
+
     if (esDiaHabil(fechaResultado)) {
       diasRestados++;
+    } else {
+      // Contabilizar fines de semana y feriados
+      if (fechaResultado.getDay() === 0 || fechaResultado.getDay() === 6) {
+        finesDeSemana++;
+      }
+      if (feriados.includes(fechaStr) && !feriadosEnRango.includes(fechaStr)) {
+        feriadosEnRango.push(fechaStr); // Aseguramos que no se dupliquen
+      }
     }
+    // Decrementar el día
+    fechaResultado.setDate(fechaResultado.getDate() - 1);
   }
 
-  return fechaResultado;
+  return {
+    fechaResultado,
+    finesDeSemana,
+    cantidadFeriados: feriadosEnRango.length,
+  };
 }
 
 // Función para mostrar el resultado
@@ -61,15 +84,26 @@ document.getElementById("calcularFecha").addEventListener("click", function () {
   const dias = parseInt(diasInput);
 
   // Llamar a la función para restar días hábiles
-  const fechaFinal = restarDiasHabiles(fechaSeleccionada, dias);
+  const { fechaResultado, finesDeSemana, cantidadFeriados } = restarDiasHabiles(
+    fechaSeleccionada,
+    dias
+  );
 
   // Mostrar el resultado en el HTML
-  const fechaFinalStr = `${fechaFinal.getDate().toString().padStart(2, "0")}/${(
-    fechaFinal.getMonth() + 1
-  )
+  const fechaFinalStr = `${fechaResultado
+    .getDate()
     .toString()
-    .padStart(2, "0")}/${fechaFinal.getFullYear()}`;
-  document.getElementById(
-    "resultadoCalculadora"
-  ).innerText = `La fecha inicial, restando ${dias} días hábiles es: ${fechaFinalStr}`;
+    .padStart(2, "0")}/${(fechaResultado.getMonth() + 1)
+    .toString()
+    .padStart(2, "0")}/${fechaResultado.getFullYear()}`;
+
+  const resultado = `
+      La fecha inicial, restando ${dias} días hábiles es: ${fechaFinalStr}.
+      <br>
+      Días de fin de semana: ${finesDeSemana}.
+      <br>
+      Número de feriados en el rango: ${cantidadFeriados}.
+    `;
+
+  document.getElementById("resultadoCalculadora").innerHTML = resultado;
 });
